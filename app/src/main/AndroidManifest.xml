@@ -644,7 +644,7 @@
             android:name=".tiles.usbdebugging.UsbDebuggingTileService"
             android:exported="true"
             android:icon="@drawable/ic_usb_on"
-            android:label="@string/usb_debugging_tile"
+            android:label="@string/adb_control_tile"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
             android:process=":tiles">
             <intent-filter>
