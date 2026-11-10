@@ -10,50 +10,35 @@ import kotlinx.coroutines.flow.Flow
 
 class UsbDebuggingTileService : BaseTileService() {
 
-    private val usbDebuggingManager by lazy { UsbDebuggingModule.getInstance(applicationContext) }
+    private val adbControlManager by lazy { UsbDebuggingModule.getInstance(applicationContext) }
     private val labelProvider by lazy { UsbDebuggingLabelProvider(applicationContext) }
     private val iconProvider by lazy { UsbDebuggingIconProvider(applicationContext) }
 
-    override fun onStartListening() {
-        usbDebuggingManager.start()
-        super.onStartListening()
-    }
-
-    override fun onStopListening() {
-        super.onStopListening()
-        usbDebuggingManager.stop()
-    }
-
     override fun onClick() {
-        if (!usbDebuggingManager.hasPermission()) {
+        if (!adbControlManager.hasPermission()) {
             startActivityAndCollapse(WriteSecureSettingsActivity::class.java)
             return
         }
-        usbDebuggingManager.toggle()
+        adbControlManager.toggle()
         updateTile()
     }
 
     override fun flowsToCollect(): List<Flow<*>> = listOf(
-        usbDebuggingManager.isEnabled,
-        usbDebuggingManager.isDeveloperOptionsEnabled,
+        adbControlManager.isEnabled,
     )
 
     override fun updateTile() {
-        val hasPermission = usbDebuggingManager.hasPermission()
-        val isEnabled = usbDebuggingManager.isEnabled.value
-        val isDeveloperOptionsEnabled = usbDebuggingManager.isDeveloperOptionsEnabled.value
+        val hasPermission = adbControlManager.hasPermission()
+        val isEnabled = adbControlManager.isEnabled.value
 
         setTileState(
-            state = when {
-                !isDeveloperOptionsEnabled -> Tile.STATE_UNAVAILABLE
-                !hasPermission -> Tile.STATE_INACTIVE
-                isEnabled -> Tile.STATE_ACTIVE
-                else -> Tile.STATE_INACTIVE
+            state = if (hasPermission && isEnabled) {
+                Tile.STATE_ACTIVE
+            } else {
+                Tile.STATE_INACTIVE
             },
             label = labelProvider.getLabel(),
-            subtitle = labelProvider.getSubtitle(
-                isEnabled, hasPermission, isDeveloperOptionsEnabled
-            ),
+            subtitle = labelProvider.getSubtitle(isEnabled, hasPermission),
             icon = iconProvider.getIcon(isEnabled),
         )
     }
