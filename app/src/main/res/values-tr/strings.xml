@@ -227,7 +227,7 @@
 
     <!--usb debugging tile-->
 
-    <string name="usb_debugging_tile">USB hata ayıklama</string>
+    <string name="adb_control_tile">USB hata ayıklama</string>
 
     <!--nfc tile-->
 
