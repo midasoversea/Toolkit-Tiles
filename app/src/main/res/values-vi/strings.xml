@@ -227,7 +227,7 @@
 
     <!--usb debugging tile-->
 
-    <string name="usb_debugging_tile">Gỡ lỗi USB</string>
+    <string name="adb_control_tile">Gỡ lỗi USB</string>
 
     <!--nfc tile-->
 
