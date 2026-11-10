@@ -258,7 +258,8 @@
     <!--usb debugging tile-->
 
     <string name="usb_debugging_tile">USB debugging</string>
-
+    <string name="adb_control_requested_on" translatable="false">ON requested · unverified</string>
+    <string name="adb_control_requested_off" translatable="false">OFF requested · unverified</string>
     <!--nfc tile-->
 
     <string name="nfc_tile">NFC</string>
