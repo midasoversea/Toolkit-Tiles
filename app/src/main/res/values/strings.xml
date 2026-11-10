@@ -201,7 +201,7 @@
     <string name="dns_tile_provider_libredns" translatable="false">LibreDNS</string>
 
     <!--ADB control tile-->
-    <string name="adb_control_tile">ADB Control</string>
+    <string name="adb_control_tile" translatable="false">ADB Control</string>
     <string name="adb_control_requested_on">ON requested · unverified</string>
     <string name="adb_control_requested_off">OFF requested · unverified</string>
 
